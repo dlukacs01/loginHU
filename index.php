@@ -30,30 +30,10 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-
-                            <?php
-                            $employees = Employee::find_by_query("
-                                SELECT e.*, d.dept_name, cse.salary, cte.title
-                                FROM employees e
-                                
-                                LEFT JOIN current_dept_emp cde
-                                    ON e.emp_no = cde.emp_no
-                                LEFT JOIN departments d
-                                    ON cde.dept_no = d.dept_no
-                                    
-                                LEFT JOIN current_salary_emp cse
-                                    ON e.emp_no = cse.emp_no
-                                    
-                                LEFT JOIN current_title_emp cte
-                                    ON e.emp_no = cte.emp_no
-                                    
-                                LIMIT 20
-                            ");
-                            ?>
-
                             <table class="table table-bordered" id="example" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
+
                                     <th>Azonosító</th>
                                     <th>Születés</th>
                                     <th>Keresztnév</th>
@@ -61,10 +41,9 @@
                                     <th>Neme</th>
                                     <th>Felvétel</th>
                                     <th>Aktuális osztály</th>
-                                    <th>Fizetés</th>
+                                    <th>Aktuális fizetés</th>
                                     <th>Aktuális beosztás</th>
-                                    <th>Szerkesztés</th>
-                                    <th>Törlés</th>
+                                    <th>Műveletek</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -76,34 +55,11 @@
                                     <th>Neme</th>
                                     <th>Felvétel</th>
                                     <th>Aktuális osztály</th>
-                                    <th>Fizetés</th>
+                                    <th>Aktuális fizetés</th>
                                     <th>Aktuális beosztás</th>
-                                    <th>Szerkesztés</th>
-                                    <th>Törlés</th>
+                                    <th>Műveletek</th>
                                 </tr>
                                 </tfoot>
-                                <tbody>
-                                <?php foreach($employees as $employee) : ?>
-                                <tr>
-                                    <td><?php echo $employee->emp_no; ?></td>
-                                    <td><?php echo $employee->birth_date; ?></td>
-                                    <td><?php echo $employee->first_name; ?></td>
-                                    <td><?php echo $employee->last_name; ?></td>
-                                    <td><?php echo $employee->gender; ?></td>
-                                    <td><?php echo $employee->hire_date; ?></td>
-                                    <td><?php echo $employee->dept_name; ?></td>
-                                    <td><?php echo $employee->salary; ?></td>
-                                    <td><?php echo $employee->title; ?></td>
-                                    <td><a href="edit.php?emp_no=<?php echo $employee->emp_no; ?>" class="btn btn-primary" role="button">Szerkesztés</a></td>
-                                    <td>
-                                        <form action="controllers/delete.php" method="post">
-                                        <input type="hidden" name="emp_no" id="emp_no" value="<?php echo $employee->emp_no; ?>">
-                                        <input type="submit" class="btn btn-danger" value="Törlés">
-                                        </form>
-                                    </td>
-                                </tr>
-                                <?php endforeach; ?>
-                                </tbody>
                             </table>
                         </div>
                     </div>

@@ -2,7 +2,7 @@
 
 <?php
 
-$employee = Employee::find_by_id($_POST['emp_no']);
+$employee = Employee::find_by_id($_GET['emp_no']);
 
 if($employee) {
 
